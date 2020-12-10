@@ -31,7 +31,7 @@ public class ListaCategoriasActivity extends AppCompatActivity implements Adapte
         ActionBar barra = getSupportActionBar();
         barra.setDisplayHomeAsUpEnabled(true);
 
-        barra.setTitle("Categorias");
+        barra.setTitle(R.string.btn_categoria);
     }
 
     @Override

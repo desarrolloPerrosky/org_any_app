@@ -1,5 +1,6 @@
 package cl.perrosky.organizapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +32,7 @@ public class ListaMarcasActivity extends AppCompatActivity implements AdapterVie
         ActionBar barra = getSupportActionBar();
         barra.setDisplayHomeAsUpEnabled(true);
 
-        barra.setTitle("Categorias");
+        barra.setTitle(R.string.btn_marca);
     }
 
     @Override
@@ -52,7 +53,9 @@ public class ListaMarcasActivity extends AppCompatActivity implements AdapterVie
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_listado, menu);
-        menu.findItem(R.id.agregar).setVisible(true);
+        menu.findItem(R.id.agregar)
+                .setVisible(true)
+                .setTitle(R.string.btn_add_categoria);
         return true;
     }
 
@@ -63,9 +66,9 @@ public class ListaMarcasActivity extends AppCompatActivity implements AdapterVie
             case android.R.id.home:
                 onBackPressed();
                 break;
-//            case R.id.agregar:
-//                startActivity(new Intent(getApplicationContext(), AgregarContactoActivity.class));
-//                return true;
+            case R.id.agregar:
+                startActivity(new Intent(getApplicationContext(), EditarMarcaActivity.class));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -73,10 +76,12 @@ public class ListaMarcasActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Marca marca = listado.get(position);
-/*
-        Intent intent = new Intent(getApplicationContext(), ContactoDetalleActivity.class);
-        intent.putExtra("contacto", contacto);
+
+        Intent intent = new Intent(getApplicationContext(), EditarMarcaActivity.class);
+        intent.putExtra(Marca.TABLA, marca);
         startActivity(intent);
- */
     }
+
+
+
 }

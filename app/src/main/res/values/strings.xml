@@ -12,13 +12,33 @@
 
     <!-- TEXTOS PARA BOTONES -->
     <string name="btn_agregar">Agregar Producto</string>
-    <string name="btn_categoria">Categorias</string>
-    <string name="btn_marca">Marcas</string>
 
+    <string name="btn_categoria">Categorias</string>
+    <string name="btn_add_categoria">Agregar Categoria</string>
+    <string name="btn_save_categoria">Guardar Categoria</string>
+
+    <string name="btn_marca">Marcas</string>
+    <string name="btn_add_marca">Agregar Marca</string>
+    <string name="btn_edit_marca">Editar Marca</string>
+    <string name="btn_save_marca">Guardar Marca</string>
+    <string name="btn_remove_marca">Eliminar Marca</string>
+
+
+    <!-- TEXTOS PARA LOS INGRESOS DE MARCAS -->
+    <string name="marca_nombre">Nombre de la Marca</string>
+    <string name="marca_descripcion">Descripción de la Marca</string>
 
     <!-- TEXTOS PARA LOS INGRESOS DE TEXTOS -->
     <string name="txt_codigo">Codigo de Producto</string>
     <string name="txt_nombre">Nombre del Producto</string>
     <string name="txt_fecha_compra">Fecha de Compra</string>
     <string name="txt_cantidad">Cantidad de Productos</string>
+
+
+
+    <string name="lbl_save_ok">Datos guardados correctamente.</string>
+    <string name="lbl_save_fail">Debe ingresar todos los datos.</string>
+
+    <string name="lbl_remove_ok">Eliminación correcta.</string>
+    <string name="lbl_remove_fail">Error al Intentar Eliminar \n Reintente mas tarde.</string>
 </resources>

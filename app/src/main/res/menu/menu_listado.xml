@@ -9,17 +9,18 @@
         android:visible="false"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/eliminar"
-        android:icon="@drawable/ic_baseline_delete_24"
-        android:title="Eliminar"
-        android:orderInCategory="100"
-        android:visible="false"
-        app:showAsAction="always"/>
-
     <item android:id="@+id/guardar"
         android:icon="@drawable/ic_baseline_save_24"
         android:title="Guardar"
-        android:orderInCategory="100"
+        android:orderInCategory="200"
         android:visible="false"
         app:showAsAction="always"/>
+
+    <item android:id="@+id/eliminar"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:title="Eliminar"
+        android:orderInCategory="300"
+        android:visible="false"
+        app:showAsAction="always"/>
+
 </menu>

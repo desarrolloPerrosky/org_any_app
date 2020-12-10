@@ -1,5 +1,6 @@
 package cl.perrosky.organizapp.bbdd;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -68,4 +69,29 @@ public class DataSource {
 
         return lista;
     }
+
+    public void guardarMarca(Marca marca) {
+        ContentValues param = new ContentValues();
+
+        param.put(Marca.colNOMBRE, marca.getNombre());
+        param.put(Marca.colDESCRIPCION, marca.getDescripcion());
+
+        openDb();
+        if(marca.getId().equals(new Integer(0))){
+            database.insert(Marca.TABLA, null, param);
+        } else {
+            String[] args = new String[]{String.valueOf( marca.getId())};
+            database.update(Marca.TABLA, param, Marca.colID + "=?", args);
+        }
+        closeDb();
+    }
+
+    public int eliminarMarca(Marca marca) {
+        openDb();
+        // TODO comprobar uso de marca en relaciones cruzadas
+        int retorno = database.delete(Marca.TABLA, Marca.colID + "=?", new String[]{String.valueOf(marca.getId())});
+        closeDb();
+        return retorno;
+    }
+
 }
