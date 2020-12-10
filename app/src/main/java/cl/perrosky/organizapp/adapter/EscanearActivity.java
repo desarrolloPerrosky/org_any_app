@@ -1,4 +1,4 @@
-package cl.perrosky.organizapp;
+package cl.perrosky.organizapp.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

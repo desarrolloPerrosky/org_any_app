@@ -1,19 +1,17 @@
-package cl.perrosky.organizapp;
+package cl.perrosky.organizapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+
+import cl.perrosky.organizapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
             case "AGREGAR":
                 startActivity(new Intent(getApplicationContext(), IngresarProductoActivity.class));
                 break;
+            case "CATEGORIA":
+                startActivity(new Intent(getApplicationContext(), ListaCategoriasActivity.class));
+                break;
+            case "MARCA":
+                startActivity(new Intent(getApplicationContext(), ListaMarcasActivity.class));
+                break;
             default:
                 break;
         }
@@ -54,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

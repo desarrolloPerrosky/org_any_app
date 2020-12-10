@@ -12,6 +12,8 @@
 
     <!-- TEXTOS PARA BOTONES -->
     <string name="btn_agregar">Agregar Producto</string>
+    <string name="btn_categoria">Categorias</string>
+    <string name="btn_marca">Marcas</string>
 
 
     <!-- TEXTOS PARA LOS INGRESOS DE TEXTOS -->

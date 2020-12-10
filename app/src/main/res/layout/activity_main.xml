@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
-    tools:context=".MainActivity">
+    android:background="@color/color3"
+    tools:context=".ui.MainActivity">
 
 
     <LinearLayout
@@ -23,7 +23,6 @@
 
 
         <Button
-            android:id="@+id/button1"
             android:tag="AGREGAR"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -32,18 +31,20 @@
             android:text="@string/btn_agregar" />
 
         <Button
-            android:id="@+id/button2"
+            android:tag="CATEGORIA"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="20dp"
-            android:text="Button" />
+            android:onClick="cambiarPantalla"
+            android:text="@string/btn_categoria" />
 
         <Button
-            android:id="@+id/button3"
+            android:tag="MARCA"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="20dp"
-            android:text="Button" />
+            android:onClick="cambiarPantalla"
+            android:text="@string/btn_marca" />
 
         <Button
             android:id="@+id/button4"

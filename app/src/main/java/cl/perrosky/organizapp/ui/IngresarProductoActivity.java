@@ -1,21 +1,21 @@
-package cl.perrosky.organizapp;
+package cl.perrosky.organizapp.ui;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import cl.perrosky.organizapp.R;
+import cl.perrosky.organizapp.adapter.EscanearActivity;
 
 public class IngresarProductoActivity extends AppCompatActivity {
 
@@ -30,13 +30,21 @@ public class IngresarProductoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ingresar_producto);
 
         tvCodigoBarra = findViewById(R.id.codigo);
+
+        ActionBar barra = getSupportActionBar();
+        barra.setDisplayHomeAsUpEnabled(true);
     }
 
-    public void escanear(View vista) {
-        Intent i = new Intent(IngresarProductoActivity.this, EscanearActivity.class);
-        startActivityForResult(i, CODIGO_INTENT);
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.home:
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -50,4 +58,10 @@ public class IngresarProductoActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void escanear(View vista) {
+        Intent i = new Intent(IngresarProductoActivity.this, EscanearActivity.class);
+        startActivityForResult(i, CODIGO_INTENT);
+    }
+
 }
