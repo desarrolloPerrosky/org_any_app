@@ -36,18 +36,23 @@ public enum Modelo {
     Modelo (String tabla, String cuerpo, String select, String[] cols, boolean redundancia){
 
         StringBuilder tmp = new StringBuilder();
+        StringBuilder tmpToInsert = new StringBuilder();
         for (int z = 0; z < cols.length; z++){
             String coma = ",";
             String sp = " ";
             tmp.append(sp);
+            tmpToInsert.append(sp);
             if(z > 0){
                 tmp.append(coma);
+                tmpToInsert.append(coma);
             }
             tmp.append(sp);
+            tmpToInsert.append(sp);
             if(redundancia){
                 tmp.append(tabla + ".");
             }
             tmp.append(cols[z]);
+            tmpToInsert.append(sp);
             if(redundancia){
                 tmp.append(" AS " + cols[z]);
             }
@@ -56,7 +61,7 @@ public enum Modelo {
 
         Log.i("CONSTRUCCION ENUM "+ tabla, "COLUMNAS SON :: " + columnas);
 
-        this.insert = INSERT_INTO + tabla + "(" + this.columnas + ") VALUES ( " + COLS + " );";
+        this.insert = INSERT_INTO + tabla + "(" + (tmpToInsert.toString()) + ") VALUES ( " + COLS + " );";
 
         this.tabla = tabla;
         this.select = select.replace(COLS, columnas);
