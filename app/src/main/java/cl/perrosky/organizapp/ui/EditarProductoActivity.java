@@ -30,6 +30,87 @@ public class EditarProductoActivity extends AppCompatActivity {
     final static int[] to = new int[] { android.R.id.text1 };
     final static String[] from = new String[] { Categoria.colNOMBRE };
 
+
+
+    private AutoCompleteTextView text;
+    private MultiAutoCompleteTextView text1;
+    private String[] languages = {"Android ","java","IOS","SQL","JDBC","Web services"};
+
+    private TextView mStateCapitalView;
+    private AutoCompleteTextView mStateNameView;
+
+    private static final int CODIGO_INTENT = 2;
+
+    private TextView txtIdCategoria;
+
+    private TextView tvCodigoBarra;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ingresar_producto);
+
+
+        // INICIO TESTER
+        text=(AutoCompleteTextView)findViewById(R.id.autoCompleteTextView1);
+        text1=(MultiAutoCompleteTextView)findViewById(R.id.multiAutoCompleteTextView1);
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,languages);
+
+        text.setAdapter(adapter);
+        text.setThreshold(1);
+
+        text1.setAdapter(adapter);
+        text1.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+        // -----------------------
+        mStateCapitalView = (TextView) findViewById(R.id.state_capital);
+        txtIdCategoria = (TextView) findViewById(R.id.state_capital);
+        mStateNameView = (AutoCompleteTextView) findViewById(R.id.state_name);
+
+        // Create an ItemAutoTextAdapter for the State Name field,
+        // and set it as the OnItemClickListener for that field.
+        ItemAutoTextAdapter adapter2 = this.new ItemAutoTextAdapter(new CategoriaDataSource(this));
+        mStateNameView.setAdapter(adapter2);
+        mStateNameView.setOnItemClickListener(adapter2);
+        // FIN TESTER
+
+        tvCodigoBarra = findViewById(R.id.codigo);
+
+        ActionBar barra = getSupportActionBar();
+        barra.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.home:
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CODIGO_INTENT) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    String codigo = data.getStringExtra("codigo");
+                    tvCodigoBarra.setText(codigo);
+                }
+            }
+        }
+    }
+
+    public void escanear(View vista) {
+        Intent i = new Intent(EditarProductoActivity.this, EscanearActivity.class);
+        startActivityForResult(i, CODIGO_INTENT);
+    }
+
+
+
     /**
      * Specializes CursorAdapter to supply choices to a AutoCompleteTextView.
      * Also implements OnItemClickListener to be notified when a choice is made,
@@ -127,82 +208,4 @@ public class EditarProductoActivity extends AppCompatActivity {
             txtIdCategoria.setText(String.valueOf(idCategoria));
         }
     }
-
-    private AutoCompleteTextView text;
-    private MultiAutoCompleteTextView text1;
-    private String[] languages = {"Android ","java","IOS","SQL","JDBC","Web services"};
-
-    private TextView mStateCapitalView;
-    private AutoCompleteTextView mStateNameView;
-
-    private static final int CODIGO_INTENT = 2;
-
-    private TextView txtIdCategoria;
-
-    private TextView tvCodigoBarra;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ingresar_producto);
-
-
-        // INICIO TESTER
-        text=(AutoCompleteTextView)findViewById(R.id.autoCompleteTextView1);
-        text1=(MultiAutoCompleteTextView)findViewById(R.id.multiAutoCompleteTextView1);
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,languages);
-
-        text.setAdapter(adapter);
-        text.setThreshold(1);
-
-        text1.setAdapter(adapter);
-        text1.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
-
-        // -----------------------
-        mStateCapitalView = (TextView) findViewById(R.id.state_capital);
-        txtIdCategoria = (TextView) findViewById(R.id.state_capital);
-        mStateNameView = (AutoCompleteTextView) findViewById(R.id.state_name);
-
-        // Create an ItemAutoTextAdapter for the State Name field,
-        // and set it as the OnItemClickListener for that field.
-        ItemAutoTextAdapter adapter2 = this.new ItemAutoTextAdapter(new CategoriaDataSource(this));
-        mStateNameView.setAdapter(adapter2);
-        mStateNameView.setOnItemClickListener(adapter2);
-        // FIN TESTER
-
-        tvCodigoBarra = findViewById(R.id.codigo);
-
-        ActionBar barra = getSupportActionBar();
-        barra.setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.home:
-            case android.R.id.home:
-                onBackPressed();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CODIGO_INTENT) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    String codigo = data.getStringExtra("codigo");
-                    tvCodigoBarra.setText(codigo);
-                }
-            }
-        }
-    }
-
-    public void escanear(View vista) {
-        Intent i = new Intent(EditarProductoActivity.this, EscanearActivity.class);
-        startActivityForResult(i, CODIGO_INTENT);
-    }
-
 }

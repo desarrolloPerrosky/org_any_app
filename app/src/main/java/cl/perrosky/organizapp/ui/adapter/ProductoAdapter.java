@@ -21,7 +21,7 @@ public class ProductoAdapter extends ArrayAdapter {
     private List<Producto> listado;
 
     public ProductoAdapter(@NonNull Context context, List<Producto> datos) {
-        super(context, R.layout.adapter_item_categoria, datos);
+        super(context, R.layout.adapter_item_producto, datos);
         this.contexto = context;
         this.listado = datos;
     }
@@ -31,16 +31,22 @@ public class ProductoAdapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(contexto);
 
-        View item = inflater.inflate(R.layout.adapter_item_categoria, null);
+        View item = inflater.inflate(R.layout.adapter_item_producto, null);
 
-        Producto marca = listado.get(position);
+        Producto producto = listado.get(position);
 
         TextView nombre = (TextView) item.findViewById(R.id.nombre);
-        nombre.setText(marca.getNombre());
+        nombre.setText(producto.getNombre());
 
         TextView descripcion = (TextView) item.findViewById(R.id.descripcion);
-        descripcion.setText(marca.getDescripcion());
+        descripcion.setText(producto.getDescripcion());
 
+        TextView marca = (TextView) item.findViewById(R.id.marca);
+        marca.setText(producto.getMarca().getNombre());
+
+        TextView categoria = (TextView) item.findViewById(R.id.categoria);
+        categoria.setText(producto.getCategoria().getNombre());
+        
         return item;
     }
 }
