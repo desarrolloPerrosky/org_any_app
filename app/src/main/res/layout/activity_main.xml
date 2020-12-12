@@ -23,15 +23,15 @@
 
 
         <Button
-            android:tag="AGREGAR"
+            android:tag="PPODUCTO"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="20dp"
             android:onClick="cambiarPantalla"
-            android:text="@string/btn_agregar" />
+            android:text="@string/btn_ingresar_producto" />
 
         <Button
-            android:tag="CATEGORIA"
+            android:tag="CATEGORIAS"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="20dp"
@@ -39,7 +39,7 @@
             android:text="@string/btn_categoria" />
 
         <Button
-            android:tag="MARCA"
+            android:tag="MARCAS"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="20dp"

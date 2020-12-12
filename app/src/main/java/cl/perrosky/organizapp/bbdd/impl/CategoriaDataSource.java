@@ -1,9 +1,13 @@
 package cl.perrosky.organizapp.bbdd.impl;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +21,11 @@ import cl.perrosky.organizapp.model.Modelo;
 public class CategoriaDataSource extends DataSource implements CategoriaAccesor {
 
     private static final String TAG = "CategoriaDataSource";
+    private Activity mActivity;
 
     public CategoriaDataSource(Context context){
         super(context);
+        this.mActivity = (Activity) context;
     }
 
     public List<Categoria> getListaCategoria() {
@@ -34,7 +40,6 @@ public class CategoriaDataSource extends DataSource implements CategoriaAccesor 
                 lista.add(new Categoria(cursor));
             }
         }
-
         closeDb();
 
         return lista;
@@ -62,5 +67,37 @@ public class CategoriaDataSource extends DataSource implements CategoriaAccesor 
         int retorno = database.delete(Categoria.TABLA, Categoria.colID + "=?", new String[]{String.valueOf(categoria.getId())});
         closeDb();
         return retorno;
+    }
+
+    public Cursor buscarCategoria(String constraint) throws SQLException {
+
+        String queryString = "SELECT " +  Modelo.CATEGORIA.getColumnas() + " FROM " + Categoria.TABLA;
+
+        if (constraint != null) {
+            constraint = "%" + constraint.trim() + "%";
+            queryString += " WHERE " + Categoria.colNOMBRE + " LIKE ? OR " + Categoria.colDESCRIPCION + " LIKE ?";
+        }
+
+        String params[] = { constraint, constraint };
+        // Si no hay parametros, estos deben ser nulos
+        if (constraint == null) {
+            params = null;
+        }
+
+        try {
+            openDb();
+            Cursor cursor = database.rawQuery(queryString, params);
+            if (cursor != null) {
+                this.mActivity.startManagingCursor(cursor);
+                cursor.moveToFirst();
+                return cursor;
+            }
+            closeDb();
+        }
+        catch (SQLException e) {
+            Log.e("AutoCompleteDbAdapter", e.toString());
+            throw e;
+        }
+        return null;
     }
 }

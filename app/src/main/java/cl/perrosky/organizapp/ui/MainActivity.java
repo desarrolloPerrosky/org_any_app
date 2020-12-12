@@ -33,16 +33,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cambiarPantalla(View vista){
-        Button boton = (Button) vista;
-        String opcion = (String) boton.getTag();
-        switch (opcion){
-            case "AGREGAR":
+        switch ((String) ((Button) vista).getTag()){
+            case "PPODUCTO":
                 startActivity(new Intent(getApplicationContext(), IngresarProductoActivity.class));
                 break;
-            case "CATEGORIA":
+            case "CATEGORIAS":
                 startActivity(new Intent(getApplicationContext(), ListaCategoriasActivity.class));
                 break;
-            case "MARCA":
+            case "MARCAS":
                 startActivity(new Intent(getApplicationContext(), ListaMarcasActivity.class));
                 break;
             default:

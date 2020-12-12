@@ -7,11 +7,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="search_hint">Hello second fragmen. Arg: %1$s</string>
 
     <!-- TEXTOS PARA BOTONES -->
-    <string name="btn_agregar">Agregar Producto</string>
+    <string name="btn_ingresar_producto">Ingresar Producto</string>
 
     <string name="btn_categoria">Categorias</string>
     <string name="btn_add_categoria">Agregar Categoria</string>
@@ -36,6 +36,7 @@
     <!-- TEXTOS PARA LOS INGRESOS DE TEXTOS -->
     <string name="txt_codigo">Codigo de Producto</string>
     <string name="txt_nombre">Nombre del Producto</string>
+    <string name="txt_marca">Marca del Producto</string>
     <string name="txt_fecha_compra">Fecha de Compra</string>
     <string name="txt_cantidad">Cantidad de Productos</string>
 

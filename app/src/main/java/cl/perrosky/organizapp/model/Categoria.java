@@ -17,7 +17,7 @@ public class Categoria implements Serializable {
     // MODELO SQL
     public static final String TABLA = "categoria";
 
-    public static final String colID = "id";
+    public static final String colID = "_id";
     public static final String colNOMBRE ="nombre";
     public static final String colDESCRIPCION = "descripcion";
 

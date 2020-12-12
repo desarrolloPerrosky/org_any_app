@@ -74,6 +74,10 @@ public enum Modelo {
         return cols;
     }
 
+    public String getColumnas() {
+        return columnas;
+    }
+
     public String get(int index) {
         return cols[index];
     }

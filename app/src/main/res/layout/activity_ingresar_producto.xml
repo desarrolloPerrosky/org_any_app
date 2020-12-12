@@ -7,7 +7,6 @@
     android:background="@color/color3"
     tools:context=".ui.IngresarProductoActivity">
 
-
     <LinearLayout
         android:id="@+id/linearLayoutContainer"
         android:layout_width="match_parent"
@@ -60,7 +59,18 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/txt_nombre"></EditText>
+            android:hint="@string/txt_nombre">
+            <requestFocus />
+        </EditText>
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="72dp"
+            android:hint="">
+        </AutoCompleteTextView>
 
         <EditText
             android:layout_width="match_parent"
@@ -72,6 +82,37 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="@string/txt_cantidad"></EditText>
+
+
+        <AutoCompleteTextView
+            android:layout_width="fill_parent"
+            android:inputType="textNoSuggestions"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:id="@+id/state_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="string/none"
+            android:id="@+id/state_capital" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="string/none"
+            android:id="@+id/id_categoria" />
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/multiAutoCompleteTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_below="@+id/autoCompleteTextView1"
+            android:layout_alignLeft="@+id/autoCompleteTextView1"
+            android:layout_alignStart="@+id/autoCompleteTextView1"
+            android:hint="Multi Auto Complete " />
 
 
     </LinearLayout>

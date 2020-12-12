@@ -16,7 +16,7 @@ public class Marca implements Serializable {
     // MODELO SQL
     public static final String TABLA = "marca";
 
-    public static final String colID = "id";
+    public static final String colID = "_id";
     public static final String colNOMBRE ="nombre";
     public static final String colDESCRIPCION = "descripcion";
 
