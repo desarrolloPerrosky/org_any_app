@@ -15,19 +15,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import cl.perrosky.organizapp.R;
-import cl.perrosky.organizapp.bbdd.DataSource;
+import cl.perrosky.organizapp.bbdd.MarcaDataSource;
 import cl.perrosky.organizapp.model.Marca;
 import cl.perrosky.organizapp.ui.adapter.MarcaAdapter;
 
 public class ListaMarcasActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
-    DataSource dataSource;
+    MarcaDataSource dataSource;
     List<Marca> listado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_generic);
+        dataSource = new MarcaDataSource(this);
 
         ActionBar barra = getSupportActionBar();
         barra.setDisplayHomeAsUpEnabled(true);
@@ -38,8 +39,6 @@ public class ListaMarcasActivity extends AppCompatActivity implements AdapterVie
     @Override
     protected void onResume() {
         super.onResume();
-
-        dataSource = new DataSource(this);
 
         listado = dataSource.getListaMarca();
 
@@ -53,9 +52,10 @@ public class ListaMarcasActivity extends AppCompatActivity implements AdapterVie
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_listado, menu);
+
         menu.findItem(R.id.agregar)
                 .setVisible(true)
-                .setTitle(R.string.btn_add_categoria);
+                .setTitle(R.string.btn_add_marca);
         return true;
     }
 

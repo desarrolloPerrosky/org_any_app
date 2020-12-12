@@ -15,7 +15,9 @@
 
     <string name="btn_categoria">Categorias</string>
     <string name="btn_add_categoria">Agregar Categoria</string>
+    <string name="btn_edit_categoria">Editar Categoria</string>
     <string name="btn_save_categoria">Guardar Categoria</string>
+    <string name="btn_remove_categoria">Eliminar Categoria</string>
 
     <string name="btn_marca">Marcas</string>
     <string name="btn_add_marca">Agregar Marca</string>
@@ -28,12 +30,14 @@
     <string name="marca_nombre">Nombre de la Marca</string>
     <string name="marca_descripcion">Descripción de la Marca</string>
 
+    <string name="categoria_nombre">Nombre de la Categoria</string>
+    <string name="categoria_descripcion">Descripción de la Categoria</string>
+
     <!-- TEXTOS PARA LOS INGRESOS DE TEXTOS -->
     <string name="txt_codigo">Codigo de Producto</string>
     <string name="txt_nombre">Nombre del Producto</string>
     <string name="txt_fecha_compra">Fecha de Compra</string>
     <string name="txt_cantidad">Cantidad de Productos</string>
-
 
 
     <string name="lbl_save_ok">Datos guardados correctamente.</string>

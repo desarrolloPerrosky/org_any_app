@@ -15,11 +15,11 @@ public class Categoria implements Serializable {
     public static final long serialVersionUID = 1L;
 
     // MODELO SQL
-    protected static final String TABLA = "categoria";
+    public static final String TABLA = "categoria";
 
-    protected static final String colID = "id";
-    protected static final String colNOMBRE ="nombre";
-    protected static final String colDESCRIPCION = "descripcion";
+    public static final String colID = "id";
+    public static final String colNOMBRE ="nombre";
+    public static final String colDESCRIPCION = "descripcion";
 
     protected static final String[] COLS = new String[]{ colID, colNOMBRE, colDESCRIPCION };
 
