@@ -34,8 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void cambiarPantalla(View vista){
         switch ((String) ((Button) vista).getTag()){
-            case "PPODUCTO":
-                startActivity(new Intent(getApplicationContext(), IngresarProductoActivity.class));
+            case "PRODUCTOS":
+                startActivity(new Intent(getApplicationContext(), ListaProductoActivity.class));
+                break;
+            case "PRODUCTO":
+                startActivity(new Intent(getApplicationContext(), EditarProductoActivity.class));
                 break;
             case "CATEGORIAS":
                 startActivity(new Intent(getApplicationContext(), ListaCategoriasActivity.class));

@@ -40,6 +40,12 @@ public class Marca implements Serializable {
         this.descripcion = "";
     }
 
+    public Marca(Integer id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     public Marca(Cursor cursor){
         this();
         this.id = Modelo.getInt(cursor, colID);

@@ -1,4 +1,4 @@
-package cl.perrosky.organizapp.bbdd;
+package cl.perrosky.organizapp.bbdd.impl;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
+import cl.perrosky.organizapp.bbdd.DataSource;
+import cl.perrosky.organizapp.bbdd.MarcaAccesor;
 import cl.perrosky.organizapp.model.Marca;
 import cl.perrosky.organizapp.model.Modelo;
 

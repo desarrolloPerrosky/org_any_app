@@ -7,15 +7,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 
-import androidx.core.app.ActivityCompat;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import cl.perrosky.organizapp.bbdd.CategoriaAccesor;
 import cl.perrosky.organizapp.bbdd.DataSource;
 import cl.perrosky.organizapp.model.Categoria;
-import cl.perrosky.organizapp.model.Marca;
 import cl.perrosky.organizapp.model.Modelo;
 
 public class CategoriaDataSource extends DataSource implements CategoriaAccesor {
@@ -48,8 +45,8 @@ public class CategoriaDataSource extends DataSource implements CategoriaAccesor 
     public void guardarCategoria(Categoria categoria) {
         ContentValues param = new ContentValues();
 
-        param.put(Marca.colNOMBRE, categoria.getNombre());
-        param.put(Marca.colDESCRIPCION, categoria.getDescripcion());
+        param.put(Categoria.colNOMBRE, categoria.getNombre());
+        param.put(Categoria.colDESCRIPCION, categoria.getDescripcion());
 
         openDb();
         if(categoria.getId().equals(new Integer(0))){

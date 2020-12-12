@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color3"
-    tools:context=".ui.IngresarProductoActivity">
+    tools:context=".ui.EditarProductoActivity">
 
     <LinearLayout
         android:id="@+id/linearLayoutContainer"
@@ -68,7 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginTop="72dp"
             android:hint="">
         </AutoCompleteTextView>
 
@@ -97,6 +96,7 @@
             android:textSize="18dp"
             android:text="string/none"
             android:id="@+id/state_capital" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

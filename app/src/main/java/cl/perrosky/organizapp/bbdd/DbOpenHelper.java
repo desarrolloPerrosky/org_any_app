@@ -24,6 +24,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(Modelo.CATEGORIA.getCreate());
         db.execSQL(Modelo.MARCA.getCreate());
+        db.execSQL(Modelo.PRODUCTO.getCreate());
         Log.i(TAG, "Base de datos creada");
 
         db.execSQL(Modelo.MARCA.getInsert("1  , 'PFIZER', ''"));
@@ -172,6 +173,10 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(Modelo.CATEGORIA.getInsert( "9, 'Antipiréticos', 'Los fármacos antipiréticos son un tipo de medicamentos que tienen la capacidad de reducir la fiebre. Entre los más conocidos están la aspirina, el ibuprofeno y el paracetamol, que también presentan otras funciones.'"));
         db.execSQL(Modelo.CATEGORIA.getInsert( "10, 'Antitusivos', 'Son fármacos que se recetan para tratar de reducir la tos no productiva, es decir, que no libera mucosidad. Se debe tener sumo cuidado con su dosis, ya que algunos de ellos, como la codeína, producen adicción.'"));
         db.execSQL(Modelo.CATEGORIA.getInsert( "11, 'Mucoliticos', 'son medicamentos que se recomiendan cuando la mucosidad dificulta una respiración correcta. Sus efectos secundarios son menores, como cefaleas o reacciones alérgicas.'"));
+
+
+        db.execSQL(Modelo.PRODUCTO.getInsert("1, 'Analgex', 'tramadol clorhidrato', '7800026245781', 1, 1, 1"));
+        db.execSQL(Modelo.PRODUCTO.getInsert("2, 'Zopinom', 'eszopiclona 3mg', '7800007747211', 30, 2, 2"));
 
         Log.i(TAG, "Base de datos poblada");
     }

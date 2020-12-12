@@ -7,8 +7,9 @@ import androidx.annotation.NonNull;
 
 public enum Modelo {
 
-    CATEGORIA(Categoria.TABLA, Categoria.CUERPO, Categoria.SELECT, Categoria.COLS),
-    MARCA(Marca.TABLA, Marca.CUERPO, Marca.SELECT, Marca.COLS);
+    CATEGORIA(Categoria.TABLA, Categoria.CUERPO, Categoria.SELECT, Categoria.COLS, false),
+    MARCA(Marca.TABLA, Marca.CUERPO, Marca.SELECT, Marca.COLS, false),
+    PRODUCTO(Producto.TABLA, Producto.CUERPO, Producto.SELECT, Producto.COLS, true);
 
     public static final String COLS = "%COLS%";
 
@@ -16,10 +17,11 @@ public enum Modelo {
     public static final String SELECT_FROM  = SELECT+COLS+" FROM ";
     public static final String INSERT_INTO  = "INSERT OR REPLACE INTO ";
 
-
     public static final String _PK  = " INTEGER PRIMARY KEY autoincrement,";
     public static final String TEXTO  = " TEXT";
     public static final String _TEXTO  = TEXTO + ",";
+    public static final String TEXTO_UNICO  = " TEXT UNIQUE";
+    public static final String _TEXTO_UNICO  = TEXTO_UNICO + ",";
     public static final String NUMBER  = " INTEGER";
     public static final String _NUMBER  = NUMBER + ",";
 
@@ -31,7 +33,7 @@ public enum Modelo {
     private int largo;
     private String columnas;
 
-    Modelo (String tabla, String cuerpo, String select, String[] cols){
+    Modelo (String tabla, String cuerpo, String select, String[] cols, boolean redundancia){
 
         StringBuilder tmp = new StringBuilder();
         for (int z = 0; z < cols.length; z++){
@@ -41,7 +43,14 @@ public enum Modelo {
             if(z > 0){
                 tmp.append(coma);
             }
-            tmp.append(sp).append(cols[z]);
+            tmp.append(sp);
+            if(redundancia){
+                tmp.append(tabla + ".");
+            }
+            tmp.append(cols[z]);
+            if(redundancia){
+                tmp.append(" AS " + cols[z]);
+            }
         }
         this.columnas = tmp.toString();
 
@@ -63,6 +72,7 @@ public enum Modelo {
     }
 
     public String getCreate(){
+        Log.i(tabla, create);
         return create;
     }
 
@@ -99,6 +109,14 @@ public enum Modelo {
     // APOYO
     private static String CREATE(String tabla, String cuerpo){
         return "CREATE TABLE " + tabla + " ( " + cuerpo + " );";
+    }
+
+    public static String FK(String tabla, String clave, String foranea ){
+        return "FOREIGN KEY (" + clave + ") REFERENCES " + tabla +"(" + foranea + ")";
+    }
+
+    public static String _FK(String tabla, String clave, String foranea ){
+        return FK(tabla, clave, foranea) + ",";
     }
 
 

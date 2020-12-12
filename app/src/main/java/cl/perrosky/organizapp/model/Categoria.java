@@ -39,6 +39,12 @@ public class Categoria implements Serializable {
         this.descripcion = "";
     }
 
+    public Categoria(Integer id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     public Categoria(Cursor cursor){
         this();
         this.id = Modelo.getInt(cursor, colID);

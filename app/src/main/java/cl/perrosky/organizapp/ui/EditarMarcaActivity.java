@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import cl.perrosky.organizapp.R;
-import cl.perrosky.organizapp.bbdd.MarcaDataSource;
+import cl.perrosky.organizapp.bbdd.impl.MarcaDataSource;
 import cl.perrosky.organizapp.model.Marca;
 
 public class EditarMarcaActivity extends AppCompatActivity {

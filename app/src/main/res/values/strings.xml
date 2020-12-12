@@ -19,6 +19,13 @@
     <string name="btn_save_categoria">Guardar Categoria</string>
     <string name="btn_remove_categoria">Eliminar Categoria</string>
 
+    <string name="btn_producto">Producto</string>
+    <string name="btn_list_producto">Listado de Productos</string>
+    <string name="btn_add_producto">Agregar Producto</string>
+    <string name="btn_edit_producto">Editar Producto</string>
+    <string name="btn_save_producto">Guardar Producto</string>
+    <string name="btn_remove_producto">Eliminar Producto</string>
+
     <string name="btn_marca">Marcas</string>
     <string name="btn_add_marca">Agregar Marca</string>
     <string name="btn_edit_marca">Editar Marca</string>
@@ -37,6 +44,7 @@
     <string name="txt_codigo">Codigo de Producto</string>
     <string name="txt_nombre">Nombre del Producto</string>
     <string name="txt_marca">Marca del Producto</string>
+    <string name="txt_categoria">Categoria del Producto</string>
     <string name="txt_fecha_compra">Fecha de Compra</string>
     <string name="txt_cantidad">Cantidad de Productos</string>
 

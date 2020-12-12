@@ -11,19 +11,21 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.OrganizApp">
+        <activity android:name=".ui.ListaProductoActivity"></activity>
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/Theme.OrganizApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name" />
-        <activity android:name=".ui.IngresarProductoActivity"/>
-        <activity android:name=".ui.EditarCategoriaActivity"/>
+        <activity android:name=".ui.EditarProductoActivity" />
+        <activity android:name=".ui.EditarCategoriaActivity" />
         <activity android:name=".ui.EditarMarcaActivity" />
         <activity android:name=".ui.ListaCategoriasActivity" />
         <activity android:name=".ui.ListaMarcasActivity" />

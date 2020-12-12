@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,7 +25,7 @@ import cl.perrosky.organizapp.bbdd.impl.CategoriaDataSource;
 import cl.perrosky.organizapp.model.Categoria;
 import cl.perrosky.organizapp.model.Modelo;
 
-public class IngresarProductoActivity extends AppCompatActivity {
+public class EditarProductoActivity extends AppCompatActivity {
 
     final static int[] to = new int[] { android.R.id.text1 };
     final static String[] from = new String[] { Categoria.colNOMBRE };
@@ -36,8 +35,7 @@ public class IngresarProductoActivity extends AppCompatActivity {
      * Also implements OnItemClickListener to be notified when a choice is made,
      * and uses the choice to update other fields on the Activity form.
      */
-    class ItemAutoTextAdapter extends SimpleCursorAdapter
-            implements android.widget.AdapterView.OnItemClickListener {
+    class ItemAutoTextAdapter extends SimpleCursorAdapter implements android.widget.AdapterView.OnItemClickListener {
 
         private CategoriaDataSource mDbHelper;
 
@@ -53,7 +51,7 @@ public class IngresarProductoActivity extends AppCompatActivity {
          */
         public ItemAutoTextAdapter(CategoriaDataSource dbHelper) {
             // Call the SimpleCursorAdapter constructor with a null Cursor.
-            super(IngresarProductoActivity.this, android.R.layout.simple_dropdown_item_1line, null, from, to);
+            super(EditarProductoActivity.this, android.R.layout.simple_dropdown_item_1line, null, from, to);
             mDbHelper = dbHelper;
         }
 
@@ -120,7 +118,7 @@ public class IngresarProductoActivity extends AppCompatActivity {
             Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
             // Get the state's capital from this row in the database.
-            String capital = Modelo.getStr(cursor, Categoria.colNOMBRE);
+            String capital = Modelo.getStr(cursor, Categoria.colDESCRIPCION);
             int idCategoria = Modelo.getInt(cursor, Categoria.colID);
             //cursor.getString(cursor.getColumnIndexOrThrow("capital"));
 
@@ -137,7 +135,6 @@ public class IngresarProductoActivity extends AppCompatActivity {
     private TextView mStateCapitalView;
     private AutoCompleteTextView mStateNameView;
 
-    private static final int CODIGO_PERMISOS_CAMARA = 1;
     private static final int CODIGO_INTENT = 2;
 
     private TextView txtIdCategoria;
@@ -204,7 +201,7 @@ public class IngresarProductoActivity extends AppCompatActivity {
     }
 
     public void escanear(View vista) {
-        Intent i = new Intent(IngresarProductoActivity.this, EscanearActivity.class);
+        Intent i = new Intent(EditarProductoActivity.this, EscanearActivity.class);
         startActivityForResult(i, CODIGO_INTENT);
     }
 

@@ -21,9 +21,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.008">
 
+        <Button
+            android:tag="PRODUCTOS"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="cambiarPantalla"
+            android:text="@string/btn_list_producto" />
 
         <Button
-            android:tag="PPODUCTO"
+            android:tag="PRODUCTO"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="20dp"
@@ -45,13 +52,6 @@
             android:layout_marginBottom="20dp"
             android:onClick="cambiarPantalla"
             android:text="@string/btn_marca" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginBottom="20dp"
-            android:text="Button" />
 
         <Button
             android:id="@+id/button5"
