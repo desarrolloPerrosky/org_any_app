@@ -15,12 +15,15 @@ import android.widget.ListView;
 import java.util.List;
 
 import cl.perrosky.organizapp.R;
+import cl.perrosky.organizapp.adapter.EscanearActivity;
 import cl.perrosky.organizapp.bbdd.impl.ProductoDataSource;
 import cl.perrosky.organizapp.model.Producto;
 import cl.perrosky.organizapp.ui.adapter.ProductoAdapter;
 
 
 public class ListaProductoActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    private static final int CODIGO_INTENT = 2;
 
     private ProductoDataSource dataSource;
     private List<Producto> listado;
@@ -49,6 +52,11 @@ public class ListaProductoActivity extends AppCompatActivity implements AdapterV
         ListView listView = (ListView) findViewById(R.id.listado);
         listView.setAdapter(adapter); // asignamos los datos
         listView.setOnItemClickListener(this); // // asignamos el escucha de eventos
+    }
+
+    public void escanear(View vista) {
+        Intent i = new Intent(ListaProductoActivity.this, EscanearActivity.class);
+        startActivityForResult(i, CODIGO_INTENT);
     }
 
     @Override

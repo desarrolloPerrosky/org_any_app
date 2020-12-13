@@ -13,6 +13,9 @@
     <!-- TEXTOS PARA BOTONES -->
     <string name="btn_ingresar_producto">Ingresar Producto</string>
 
+    <string name="btn_usuario">Usuarios</string>
+
+
     <string name="btn_categoria">Categorias</string>
     <string name="btn_add_categoria">Agregar Categoria</string>
     <string name="btn_edit_categoria">Editar Categoria</string>
@@ -41,6 +44,7 @@
     <string name="categoria_descripcion">Descripción de la Categoria</string>
 
     <!-- TEXTOS PARA LOS INGRESOS DE TEXTOS -->
+
     <string name="txt_codigo">Codigo de Producto</string>
     <string name="txt_nombre">Nombre del Producto</string>
     <string name="txt_descripcion">Descripcion del Producto</string>
@@ -49,6 +53,8 @@
     <string name="txt_fecha_compra">Fecha de Compra</string>
     <string name="txt_cantidad">Cantidad de Productos</string>
 
+
+    <string name="lbl_texto_vacio">--------------------------</string>
 
     <string name="lbl_save_ok">Datos guardados correctamente.</string>
     <string name="lbl_save_fail">Debe ingresar todos los datos.</string>

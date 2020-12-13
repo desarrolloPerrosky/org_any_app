@@ -1,5 +1,6 @@
 package cl.perrosky.organizapp.model;
 
+
 import android.database.Cursor;
 import android.util.Log;
 
@@ -11,15 +12,18 @@ import static cl.perrosky.organizapp.model.Modelo._PK;
 import static cl.perrosky.organizapp.model.Modelo._TEXTO;
 import static cl.perrosky.organizapp.model.Modelo._TEXTO_UNICO;
 
+
+
+
 public class Usuario implements Serializable {
 
     public static final long serialVersionUID = 1L;
-
 
     // MODELO SQL
     public static final String TABLA = "usuario";
 
     public static final String colID = "_id";
+
     public static final String colNOMBRE ="nombre";
     public static final String colAPELLIDO = "apellido";
     public static final String colCORREO = "correo";
@@ -113,4 +117,3 @@ public class Usuario implements Serializable {
 
 
 }
-

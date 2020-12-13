@@ -3,6 +3,8 @@
     package="cl.perrosky.organizapp">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="false"
@@ -11,7 +13,8 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.OrganizApp">
-        <activity android:name=".ui.ListaProductoActivity"></activity>
+        <activity android:name=".ui.EditarStockProductoActivity"></activity>
+        <activity android:name=".ui.ListaProductoActivity" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/Theme.OrganizApp.NoActionBar">
@@ -29,6 +32,7 @@
         <activity android:name=".ui.EditarMarcaActivity" />
         <activity android:name=".ui.ListaCategoriasActivity" />
         <activity android:name=".ui.ListaMarcasActivity" />
+        <activity android:name=".ui.ListaUsuariosActivity" />
         <activity android:name=".adapter.EscanearActivity" />
     </application>
 

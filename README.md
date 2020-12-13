@@ -35,7 +35,8 @@ perfil
 
 
 
-´´´
+```
+
 <?php
 include_once '../include/Config.php';
 require '../libs/Slim/Slim.php';
@@ -157,4 +158,5 @@ function verifyRequiredParams($required_fields) {
         $app->stop();
     }
 }
-´´´
+
+```

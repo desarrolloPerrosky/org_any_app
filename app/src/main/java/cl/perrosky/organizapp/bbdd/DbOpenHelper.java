@@ -175,9 +175,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(Modelo.CATEGORIA.getInsert( "10, 'Antitusivos', 'Son fármacos que se recetan para tratar de reducir la tos no productiva, es decir, que no libera mucosidad. Se debe tener sumo cuidado con su dosis, ya que algunos de ellos, como la codeína, producen adicción.'"));
         db.execSQL(Modelo.CATEGORIA.getInsert( "11, 'Mucoliticos', 'son medicamentos que se recomiendan cuando la mucosidad dificulta una respiración correcta. Sus efectos secundarios son menores, como cefaleas o reacciones alérgicas.'"));
 
-
         db.execSQL(Modelo.PRODUCTO.getInsert("1, 'Analgex', 'tramadol clorhidrato', '7800026245781', 1, 1, 1"));
         db.execSQL(Modelo.PRODUCTO.getInsert("2, 'Zopinom', 'eszopiclona 3mg', '7800007747211', 30, 2, 2"));
+
+        db.execSQL(Modelo.USUARIO.getInsert("1, 'A', 'B', 'hector@organizapp.cl','admin'"));
+        db.execSQL(Modelo.USUARIO.getInsert("2, 'A', 'B', 'jaime@organizapp.cl','ekono'"));
+        db.execSQL(Modelo.USUARIO.getInsert("3, 'A', 'B', 'felipe@organizapp.cl','vendedor'"));
 
         Log.i(TAG, "Base de datos poblada");
     }
