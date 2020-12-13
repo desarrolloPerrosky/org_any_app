@@ -52,7 +52,7 @@ public enum Modelo {
                 tmp.append(tabla + ".");
             }
             tmp.append(cols[z]);
-            tmpToInsert.append(sp);
+            tmpToInsert.append(cols[z]);
             if(redundancia){
                 tmp.append(" AS " + cols[z]);
             }
