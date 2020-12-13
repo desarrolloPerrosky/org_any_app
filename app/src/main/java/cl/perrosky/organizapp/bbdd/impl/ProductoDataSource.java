@@ -10,6 +10,7 @@ import java.util.List;
 
 import cl.perrosky.organizapp.bbdd.DataSource;
 import cl.perrosky.organizapp.bbdd.ProductoAccesor;
+import cl.perrosky.organizapp.model.Categoria;
 import cl.perrosky.organizapp.model.Modelo;
 import cl.perrosky.organizapp.model.Producto;
 
@@ -19,6 +20,24 @@ public class ProductoDataSource extends DataSource implements ProductoAccesor {
 
     public ProductoDataSource(Context context){
         super(context);
+    }
+
+    @Override
+    public Producto buscarProducto(String codigoBarra) {
+        Producto producto = null;
+        openDb();
+        final String select = Modelo.PRODUCTO.getSelect()  + " WHERE " + Producto.colBARRA + "=?";
+        Log.i(TAG, "Generando QUERY :: " + select);
+
+        Cursor cursor = database.rawQuery( select, new String[]{codigoBarra});
+        if(cursor.getCount() > 0){
+            while (cursor.moveToNext()){
+                producto = new Producto(cursor);
+                break;
+            }
+        }
+        closeDb();
+        return producto;
     }
 
     @Override
@@ -64,4 +83,5 @@ public class ProductoDataSource extends DataSource implements ProductoAccesor {
         closeDb();
         return retorno;
     }
+
 }

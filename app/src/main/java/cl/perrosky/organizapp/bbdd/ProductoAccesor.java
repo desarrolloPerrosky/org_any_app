@@ -7,6 +7,8 @@ import cl.perrosky.organizapp.model.Producto;
 
 public interface ProductoAccesor {
 
+    public Producto buscarProducto(String codigoBarra);
+
     public List<Producto> getListaProducto();
 
     public void guardarProducto(Producto producto);

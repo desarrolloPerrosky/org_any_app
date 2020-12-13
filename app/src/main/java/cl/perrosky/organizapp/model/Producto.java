@@ -47,15 +47,15 @@ public class Producto implements Serializable {
             ", " + Categoria.TABLA + "." + Categoria.colDESCRIPCION + " AS descripcion_categoria " +
             " FROM  "+ TABLA +
             " INNER JOIN " + Marca.TABLA + " ON " + Producto.TABLA + "." + Producto.colID_MARCA + " = " + Marca.TABLA + "." + Marca.colID + " " +
-            " INNER JOIN " + Categoria.TABLA + " ON " + Producto.TABLA + "." + Producto.colID_CATEGORIA + " = " + Categoria.TABLA + "." + Categoria.colID + " "
-            + " ORDER BY " + TABLA + "." + colNOMBRE;
+            " INNER JOIN " + Categoria.TABLA + " ON " + Producto.TABLA + "." + Producto.colID_CATEGORIA + " = " + Categoria.TABLA + "." + Categoria.colID + " ";
+    protected static final String ORDER = " ORDER BY " + TABLA + "." + colNOMBRE;
 
     // Atributos
     private Integer id;
     private String nombre;
     private String descripcion;
     private String codigoDeBarras;
-    private int unidades;
+    private Integer unidades;
     private Marca marca;
     private Categoria categoria;
 
@@ -64,7 +64,7 @@ public class Producto implements Serializable {
         this.nombre = "";
         this.descripcion = "";
         this.codigoDeBarras = "";
-        this.unidades = 1;
+        this.unidades = 0;
         this.marca = new Marca();
         this.categoria = new Categoria();
     }
@@ -76,16 +76,14 @@ public class Producto implements Serializable {
         this.descripcion = Modelo.getStr(cursor, colDESCRIPCION);
         this.codigoDeBarras = Modelo.getStr(cursor, colBARRA);
         this.unidades = Modelo.getInt(cursor, colUNIDADES);
-        this.marca = new Marca(
-                Modelo.getInt(cursor, colID_MARCA),
-                Modelo.getStr(cursor, "nombre_marca"),
-                Modelo.getStr(cursor, "descripcion_marca")
-        );
-        this.categoria = new Categoria(
-                Modelo.getInt(cursor, colID_CATEGORIA),
-                Modelo.getStr(cursor, "nombre_categoria"),
-                Modelo.getStr(cursor, "descripcion_categoria")
-        );
+
+        this.marca.setId(Modelo.getInt(cursor, colID_MARCA));
+        this.marca.setNombre(Modelo.getStr(cursor, "nombre_marca"));
+        this.marca.setDescripcion(Modelo.getStr(cursor, "descripcion_marca"));
+
+        this.categoria.setId(Modelo.getInt(cursor, colID_CATEGORIA));
+        this.categoria.setNombre(Modelo.getStr(cursor, "nombre_categoria"));
+        this.categoria.setDescripcion(Modelo.getStr(cursor, "descripcion_categoria"));
 
         Log.i("PRODUCTO CREADO", this.toString());
     }
@@ -123,11 +121,11 @@ public class Producto implements Serializable {
         this.codigoDeBarras = codigoDeBarras;
     }
 
-    public int getUnidades() {
+    public Integer getUnidades() {
         return unidades;
     }
 
-    public void setUnidades(int unidades) {
+    public void setUnidades(Integer unidades) {
         this.unidades = unidades;
     }
 

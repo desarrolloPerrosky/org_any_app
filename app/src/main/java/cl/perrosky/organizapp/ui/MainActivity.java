@@ -46,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
             case "MARCAS":
                 startActivity(new Intent(getApplicationContext(), ListaMarcasActivity.class));
                 break;
+            case "INVENTARIO":
+                startActivity(new Intent(getApplicationContext(), EditarStockProductoActivity.class));
+                break;
             default:
+                startActivity(new Intent(getApplicationContext(), EditarStockProductoActivity.class));
                 break;
         }
     }
