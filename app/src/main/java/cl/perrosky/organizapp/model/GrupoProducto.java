@@ -54,4 +54,14 @@ public class GrupoProducto implements Serializable {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+
+    @Override
+    public String toString() {
+        return "GrupoProducto{" +
+                "id=" + id +
+                ", cantidad=" + cantidad +
+                ", precio=" + precio +
+                ", producto=" + producto +
+                '}';
+    }
 }

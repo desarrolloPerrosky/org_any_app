@@ -21,7 +21,7 @@ public class EscanearActivity extends AppCompatActivity implements ZXingScannerV
     public static final String RETORNO = "codigo_de_barras";
     private static final int CODIGO_PERMISOS_CAMARA = 1;
 
-    public static final int CODIGO_INTENT = 2;
+    public static final int CODIGO_INTENT = 3;
 
     private boolean permisoCamaraConcedido = false;
     private boolean permisoSolicitadoDesdeBoton = false;

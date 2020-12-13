@@ -1,12 +1,14 @@
 package cl.perrosky.organizapp.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,16 +16,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import cl.perrosky.organizapp.R;
+import cl.perrosky.organizapp.adapter.EscanearActivity;
 import cl.perrosky.organizapp.bbdd.impl.ProductoDataSource;
 import cl.perrosky.organizapp.model.GrupoProducto;
+import cl.perrosky.organizapp.model.Producto;
 
 public class EditarStockProductoActivity extends AppCompatActivity {
 
     public static final String RETORNO = "producto";
-    public static final int CODIGO_INTENT = 3;
+    public static final int CODIGO_INTENT = 5;
 
     private ProductoDataSource dataSource;
 
+
+    private TextView txtNombre;
+    private TextView txtDescripcion;
+    private TextView txtMarca;
+    private TextView txtCategoria;
 
     private EditText txtCantidad;
     private EditText txtValor;
@@ -50,16 +59,15 @@ public class EditarStockProductoActivity extends AppCompatActivity {
         txtCantidad = (EditText) findViewById(R.id.txt_cantidad);
         txtValor = (EditText) findViewById(R.id.txt_precio);
 
-        if(grupoProducto.getProducto().getId().equals(0L)){
-            Intent i = new Intent(EditarStockProductoActivity.this, EditarProductoActivity.class);
-            i.putExtra(EditarProductoActivity.RETORNO, grupoProducto.getProducto());
-            startActivityForResult(i, EditarProductoActivity.CODIGO_INTENT);
-        } else {
-            ((TextView) findViewById(R.id.nombre)).setText(grupoProducto.getProducto().getNombre());
-            ((TextView) findViewById(R.id.descripcion)).setText(grupoProducto.getProducto().getDescripcion());
+        txtNombre = (TextView) findViewById(R.id.nombre);
+        txtDescripcion = (TextView) findViewById(R.id.descripcion);
+        txtMarca = (TextView) findViewById(R.id.marca);
+        txtCategoria = (TextView) findViewById(R.id.categoria);
 
-            txtCantidad.setText(grupoProducto.getCantidad().toString());
-            txtValor.setText(grupoProducto.getPrecio().toString());
+        if(grupoProducto.getProducto().getId().equals(0L)){
+            editarProducto();
+        } else {
+            refreshVista();
         }
     }
 
@@ -77,9 +85,9 @@ public class EditarStockProductoActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_listado, menu);
 
-        menu.findItem(R.id.agregar)
+        menu.findItem(R.id.editar)
                 .setVisible(true)
-                .setTitle(R.string.btn_add_producto);
+                .setTitle(R.string.btn_edit_producto);
         return true;
     }
 
@@ -90,8 +98,8 @@ public class EditarStockProductoActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 break;
-            case R.id.agregar:
-                startActivity(new Intent(getApplicationContext(), EditarProductoActivity.class));
+            case R.id.editar:
+                editarProducto();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -108,5 +116,40 @@ public class EditarStockProductoActivity extends AppCompatActivity {
 
         // Cerrar la actividad. Ahora mira onActivityResult de MainActivity
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EditarProductoActivity.CODIGO_INTENT) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    Producto producto = (Producto) data.getSerializableExtra(EditarProductoActivity.RETORNO);
+                    if(producto!=null){
+                        Log.i("DESDE EDITAR PRODUCTO", producto.toString());
+                        grupoProducto.setProducto(producto);
+                        refreshVista();
+                    }
+                }
+            }
+        }
+    }
+
+    private void editarProducto(){
+        Intent i = new Intent(EditarStockProductoActivity.this, EditarProductoActivity.class);
+        i.putExtra(EditarProductoActivity.RETORNO, grupoProducto.getProducto());
+        startActivityForResult(i, EditarProductoActivity.CODIGO_INTENT);
+    }
+
+    private void refreshVista(){
+        Log.i("REFRESH VISTA", grupoProducto.toString());
+        txtNombre.setText(grupoProducto.getProducto().getNombre());
+        txtDescripcion.setText(grupoProducto.getProducto().getDescripcion());
+        txtMarca.setText(grupoProducto.getProducto().getMarca().getNombre());
+        txtCategoria.setText(grupoProducto.getProducto().getCategoria().getNombre());
+
+        txtCantidad.setText(grupoProducto.getCantidad().toString());
+        txtValor.setText(grupoProducto.getPrecio().toString());
     }
 }

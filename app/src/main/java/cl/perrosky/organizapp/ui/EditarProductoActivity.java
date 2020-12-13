@@ -139,7 +139,7 @@ public class EditarProductoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CODIGO_INTENT) {
+        if (requestCode == EscanearActivity.CODIGO_INTENT) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     String codigo = data.getStringExtra(EscanearActivity.RETORNO);
@@ -151,7 +151,7 @@ public class EditarProductoActivity extends AppCompatActivity {
 
     public void escanear(View vista) {
         Intent i = new Intent(EditarProductoActivity.this, EscanearActivity.class);
-        startActivityForResult(i, CODIGO_INTENT);
+        startActivityForResult(i, EscanearActivity.CODIGO_INTENT);
     }
 
     private boolean productoEnEdicion(){

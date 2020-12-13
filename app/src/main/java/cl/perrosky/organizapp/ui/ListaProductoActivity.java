@@ -23,7 +23,7 @@ import cl.perrosky.organizapp.ui.adapter.ProductoAdapter;
 
 public class ListaProductoActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private static final int CODIGO_INTENT = 2;
+    //private static final int  = 2;
 
     private ProductoDataSource dataSource;
     private List<Producto> listado;
@@ -56,7 +56,7 @@ public class ListaProductoActivity extends AppCompatActivity implements AdapterV
 
     public void escanear(View vista) {
         Intent i = new Intent(ListaProductoActivity.this, EscanearActivity.class);
-        startActivityForResult(i, CODIGO_INTENT);
+        startActivityForResult(i, EscanearActivity.CODIGO_INTENT);
     }
 
     @Override

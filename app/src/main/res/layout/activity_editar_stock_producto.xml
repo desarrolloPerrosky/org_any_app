@@ -82,7 +82,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
                         android:textStyle="bold"
-                        android:text="Apellido Paterno" />
+                        android:text="@string/txt_descripcion" />
 
                     <TextView
                         android:id="@+id/descripcion"
@@ -108,7 +108,7 @@
                         android:text="@string/txt_categoria" />
 
                     <TextView
-                        android:id="@+id/materno"
+                        android:id="@+id/categoria"
                         android:layout_width="wrap_content"
                         android:layout_height="33dp"
                         android:gravity="center_vertical|left"
@@ -132,7 +132,7 @@
                         android:text="@string/txt_marca" />
 
                     <TextView
-                        android:id="@+id/telefono"
+                        android:id="@+id/marca"
                         android:layout_width="wrap_content"
                         android:layout_height="33dp"
                         android:gravity="center_vertical|left"
@@ -157,9 +157,9 @@
 
                     <EditText
                         android:id="@+id/txt_cantidad"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/txt_codigo"
+                        android:hint="Cantidad"
                         android:inputType="number" />
 
                 </TableRow>
@@ -181,7 +181,7 @@
                         android:id="@+id/txt_precio"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="@string/txt_codigo"
+                        android:hint="precio"
                         android:inputType="number" />
 
                 </TableRow>
