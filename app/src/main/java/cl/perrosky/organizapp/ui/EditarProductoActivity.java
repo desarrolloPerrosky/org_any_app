@@ -153,7 +153,15 @@ public class EditarProductoActivity extends AppCompatActivity {
 
     private boolean validarProducto() {
         boolean validado = false;
-/*
+
+        if(txtCodigoBarra.getText().toString().isEmpty()){
+            txtCodigoBarra.setBackgroundColor(getResources().getColor(R.color.warning));
+        } else {
+            txtCodigoBarra.setBackgroundColor(getResources().getColor(R.color.color3));
+            validado = true;
+        }
+
+
         if(txtNombre.getText().toString().isEmpty()){
             txtNombre.setBackgroundColor(getResources().getColor(R.color.warning));
         } else {
@@ -169,11 +177,45 @@ public class EditarProductoActivity extends AppCompatActivity {
             validado &= true;
         }
 
-        if(validado){
-            categoria.setNombre(txtNombre.getText().toString());
-            categoria.setDescripcion(txtDescripcion.getText().toString());
+        if(txtCantidad.getText().toString().isEmpty() ||
+            Integer.valueOf(txtCantidad.getText().toString()) > 0
+        ){
+            txtCantidad.setBackgroundColor(getResources().getColor(R.color.warning));
+            validado = false;
+        } else {
+            txtCantidad.setBackgroundColor(getResources().getColor(R.color.color3));
+            validado &= true;
         }
- */
+
+
+        if(autoCompleteCategoria.getText().toString().isEmpty() || producto.getCategoria().getId() >0){
+            autoCompleteCategoria.setBackgroundColor(getResources().getColor(R.color.warning));
+            validado = false;
+        } else {
+            autoCompleteCategoria.setBackgroundColor(getResources().getColor(R.color.color3));
+            validado &= true;
+        }
+
+
+        if(autoCompleteMarca.getText().toString().isEmpty() || producto.getMarca().getId() < 1){
+            autoCompleteMarca.setBackgroundColor(getResources().getColor(R.color.warning));
+            validado = false;
+        } else {
+            autoCompleteMarca.setBackgroundColor(getResources().getColor(R.color.color3));
+            validado &= true;
+        }
+
+
+        if(validado){
+            producto.setCodigoDeBarras(txtCodigoBarra.getText().toString());
+            producto.setNombre(txtNombre.getText().toString());
+            producto.setDescripcion(txtDescripcion.getText().toString());
+            producto.setUnidades(Integer.valueOf(txtCantidad.getText().toString()));
+
+
+
+        }
+
         return validado;
     }
 

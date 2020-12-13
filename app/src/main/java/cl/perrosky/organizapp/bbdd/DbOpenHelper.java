@@ -23,6 +23,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(Modelo.CATEGORIA.getCreate());
+        db.execSQL(Modelo.USUARIO.getCreate());
         db.execSQL(Modelo.MARCA.getCreate());
         db.execSQL(Modelo.PRODUCTO.getCreate());
         Log.i(TAG, "Base de datos creada");
