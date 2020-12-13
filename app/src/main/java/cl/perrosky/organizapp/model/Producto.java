@@ -51,7 +51,7 @@ public class Producto implements Serializable {
     protected static final String ORDER = " ORDER BY " + TABLA + "." + colNOMBRE;
 
     // Atributos
-    private Integer id;
+    private Long id;
     private String nombre;
     private String descripcion;
     private String codigoDeBarras;
@@ -60,7 +60,7 @@ public class Producto implements Serializable {
     private Categoria categoria;
 
     public Producto(){
-        this.id = 0;
+        this.id = 0L;
         this.nombre = "";
         this.descripcion = "";
         this.codigoDeBarras = "";
@@ -71,7 +71,7 @@ public class Producto implements Serializable {
 
     public Producto(Cursor cursor){
         this();
-        this.id = Modelo.getInt(cursor, colID);
+        this.id = Modelo.getLong(cursor, colID);
         this.nombre = Modelo.getStr(cursor, colNOMBRE);
         this.descripcion = Modelo.getStr(cursor, colDESCRIPCION);
         this.codigoDeBarras = Modelo.getStr(cursor, colBARRA);
@@ -89,11 +89,11 @@ public class Producto implements Serializable {
     }
 
     // GETTER AND SETTER
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

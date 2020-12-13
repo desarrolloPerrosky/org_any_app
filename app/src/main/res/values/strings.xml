@@ -57,6 +57,7 @@
     <string name="lbl_texto_vacio">--------------------------</string>
 
     <string name="lbl_save_ok">Datos guardados correctamente.</string>
+    <string name="lbl_save_error">Error al guardar.\n Reintente mas tarde.</string>
     <string name="lbl_save_fail">Debe ingresar todos los datos.</string>
 
     <string name="lbl_remove_ok">Eliminación correcta.</string>

@@ -11,7 +11,7 @@ public interface ProductoAccesor {
 
     public List<Producto> getListaProducto();
 
-    public void guardarProducto(Producto producto);
+    public Producto guardarProducto(Producto producto);
 
     public int eliminarProducto(Producto producto);
 }

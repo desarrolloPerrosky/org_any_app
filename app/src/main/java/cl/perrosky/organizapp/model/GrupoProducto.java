@@ -8,14 +8,18 @@ public class GrupoProducto implements Serializable {
 
     // Atributos
     private Integer id;
-    private Integer cantidad;
-    private Integer precio;
+    private Long cantidad;
+    private Long precio;
     private Producto producto;
 
-    public GrupoProducto(Producto producto){
+    public GrupoProducto(){
         this.id = 0;
-        this.cantidad = 0;
-        this.precio = 0;
+        this.cantidad = 0L;
+        this.precio = 0L;
+        this.producto = new Producto();
+    }
+    public GrupoProducto(Producto producto){
+        this();
         this.producto = producto;
     }
 
@@ -27,19 +31,19 @@ public class GrupoProducto implements Serializable {
         this.id = id;
     }
 
-    public Integer getCantidad() {
+    public Long getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
-    public Integer getPrecio() {
+    public Long getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Integer precio) {
+    public void setPrecio(Long precio) {
         this.precio = precio;
     }
 

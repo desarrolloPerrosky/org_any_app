@@ -130,8 +130,11 @@ public enum Modelo {
     public static String getStr(@NonNull Cursor cursor, String col){
         return cursor.getString(cursor.getColumnIndex(col));
     }
-    public static int getInt(@NonNull Cursor cursor, String col){
+    public static Integer getInt(@NonNull Cursor cursor, String col){
         return  cursor.getInt(cursor.getColumnIndex(col));
+    }
+    public static Long getLong(@NonNull Cursor cursor, String col){
+        return  cursor.getLong(cursor.getColumnIndex(col));
     }
 
 }

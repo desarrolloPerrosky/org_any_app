@@ -59,20 +59,33 @@ public class ProductoDataSource extends DataSource implements ProductoAccesor {
     }
 
     @Override
-    public void guardarProducto(Producto producto) {
+    public Producto guardarProducto(Producto producto) {
         ContentValues param = new ContentValues();
 
+        param.put(Producto.colBARRA, producto.getCodigoDeBarras());
         param.put(Producto.colNOMBRE, producto.getNombre());
         param.put(Producto.colDESCRIPCION, producto.getDescripcion());
+        param.put(Producto.colUNIDADES, producto.getUnidades());
+        param.put(Producto.colID_MARCA, producto.getMarca().getId());
+        param.put(Producto.colID_CATEGORIA, producto.getCategoria().getId());
 
         openDb();
-        if(producto.getId().equals(new Integer(0))){
-            database.insert(Producto.TABLA, null, param);
+        if(producto.getId().equals(0L)){
+            Log.i(TAG, "GUARDANDO PRODUCTO ::" + producto.toString());
+            Long id = database.insert(Producto.TABLA, null, param);
+            if(id > -1 ){
+                producto.setId(id);
+            } else {
+                return null;
+            }
         } else {
-            String[] args = new String[]{String.valueOf(producto.getId())};
+            Log.i(TAG, "ACTUALIZANDO PRODUCTO ::" + producto.toString());
+            String[] args = new String[]{producto.getId().toString()};
             database.update(Producto.TABLA, param, Producto.colID + "=?", args);
         }
         closeDb();
+
+        return producto;
     }
 
     @Override

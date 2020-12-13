@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,15 +32,14 @@ import cl.perrosky.organizapp.model.Producto;
 
 public class EditarProductoActivity extends AppCompatActivity {
 
+    public static final String RETORNO = "producto";
+    public static final int CODIGO_INTENT = 2;
+
     final static int[] toCategoria = new int[] { android.R.id.text1 };
     final static String[] fromCategoria = new String[] { Categoria.colNOMBRE };
 
     final static int[] toMarca = new int[] { android.R.id.text1 };
     final static String[] fromMarca = new String[] {Marca.colNOMBRE };
-
-
-
-    private static final int CODIGO_INTENT = 2;
 
 
     private EditText txtCodigoBarra;
@@ -85,14 +85,17 @@ public class EditarProductoActivity extends AppCompatActivity {
         if(productoEnEdicion()) {
             barra.setTitle(R.string.btn_edit_producto);
         } else {
-            producto = new Producto();
+            if(producto==null){
+                producto = new Producto();
+            }
             barra.setTitle(R.string.btn_add_producto);
         }
+        Log.i("MUESTRA PARAMETRO", "PRODUCTO ::" + producto.toString());
 
         txtCodigoBarra.setText(producto.getCodigoDeBarras());
         txtNombre.setText(producto.getNombre());
         txtDescripcion.setText(producto.getDescripcion());
-        txtCantidad.setText(String.valueOf(producto.getUnidades()));
+        txtCantidad.setText(producto.getUnidades().toString());
 
         autoCompleteCategoria.setText(producto.getCategoria().getNombre());
         autoCompleteMarca.setText(producto.getMarca().getNombre());
@@ -118,9 +121,13 @@ public class EditarProductoActivity extends AppCompatActivity {
                 break;
             case R.id.guardar:
                 if (validarProducto()){
-                    (new ProductoDataSource(this)).guardarProducto(producto);
-                    Toast.makeText(getApplicationContext(), R.string.lbl_save_ok, Toast.LENGTH_SHORT).show();
-                    cerrar();
+                    Producto newProducto = (new ProductoDataSource(this)).guardarProducto(producto);
+                    if(newProducto == null){
+                        Toast.makeText(getApplicationContext(), R.string.lbl_save_error, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), R.string.lbl_save_ok, Toast.LENGTH_SHORT).show();
+                        retornar(newProducto);
+                    }
                 }else{
                     Toast.makeText(getApplicationContext(), R.string.lbl_save_fail, Toast.LENGTH_SHORT).show();
                 }
@@ -148,7 +155,7 @@ public class EditarProductoActivity extends AppCompatActivity {
     }
 
     private boolean productoEnEdicion(){
-        return (producto!=null && producto.getId() > 0);
+        return (producto!=null && producto.getId() > 0L);
     }
 
     private boolean validarProducto() {
@@ -177,18 +184,28 @@ public class EditarProductoActivity extends AppCompatActivity {
             validado &= true;
         }
 
-        if(txtCantidad.getText().toString().isEmpty() ||
-            Integer.valueOf(txtCantidad.getText().toString()) > 0
-        ){
-            txtCantidad.setBackgroundColor(getResources().getColor(R.color.warning));
-            validado = false;
+        if(txtCantidad.getText().toString().isEmpty()){
+            Integer numeroReal = 0;
+            try {
+                numeroReal = Integer.valueOf(txtCantidad.getText().toString());
+            }catch (NumberFormatException e){
+                Log.e("CONVERSOR FALLA",  e.getMessage());
+            }
+
+            if(numeroReal.equals(0)){
+                txtCantidad.setBackgroundColor(getResources().getColor(R.color.warning));
+                validado = false;
+            } else {
+                txtCantidad.setBackgroundColor(getResources().getColor(R.color.color3));
+                validado &= true;
+            }
         } else {
             txtCantidad.setBackgroundColor(getResources().getColor(R.color.color3));
             validado &= true;
         }
 
 
-        if(autoCompleteCategoria.getText().toString().isEmpty() || producto.getCategoria().getId() >0){
+        if(producto.getCategoria().getId().equals(0)){
             autoCompleteCategoria.setBackgroundColor(getResources().getColor(R.color.warning));
             validado = false;
         } else {
@@ -197,7 +214,7 @@ public class EditarProductoActivity extends AppCompatActivity {
         }
 
 
-        if(autoCompleteMarca.getText().toString().isEmpty() || producto.getMarca().getId() < 1){
+        if(producto.getMarca().getId().equals(0)){
             autoCompleteMarca.setBackgroundColor(getResources().getColor(R.color.warning));
             validado = false;
         } else {
@@ -205,18 +222,21 @@ public class EditarProductoActivity extends AppCompatActivity {
             validado &= true;
         }
 
-
         if(validado){
             producto.setCodigoDeBarras(txtCodigoBarra.getText().toString());
             producto.setNombre(txtNombre.getText().toString());
             producto.setDescripcion(txtDescripcion.getText().toString());
             producto.setUnidades(Integer.valueOf(txtCantidad.getText().toString()));
-
-
-
         }
-
         return validado;
+    }
+
+    private void retornar(Producto producto){
+        Intent intentRegreso = new Intent();
+        intentRegreso.putExtra(RETORNO, producto);
+        setResult(Activity.RESULT_OK, intentRegreso);
+
+        cerrar();
     }
 
     private void cerrar(){
@@ -238,12 +258,12 @@ public class EditarProductoActivity extends AppCompatActivity {
                 return getFilterQueryProvider().runQuery(constraint);
             }
             Cursor cursor = mDbHelper.buscarCategoria( (constraint != null ? constraint.toString() : null));
-            producto.getCategoria().setId(0);
             return cursor;
         }
 
         @Override
         public String convertToString(Cursor cursor) {
+            producto.setCategoria(new Categoria());
             final int columnIndex = cursor.getColumnIndexOrThrow(Categoria.colNOMBRE);
             final String str = cursor.getString(columnIndex);
             return str;
@@ -253,8 +273,9 @@ public class EditarProductoActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> listView, View view, int position, long id) {
             Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-            int idCategoria = Modelo.getInt(cursor, Categoria.colID);
-            producto.getCategoria().setId(idCategoria);
+            producto.getCategoria().setId(Modelo.getInt(cursor, Categoria.colID));
+            producto.getCategoria().setNombre(Modelo.getStr(cursor, Categoria.colNOMBRE));
+            producto.getCategoria().setDescripcion(Modelo.getStr(cursor, Categoria.colDESCRIPCION));
         }
     }
 
@@ -272,15 +293,16 @@ public class EditarProductoActivity extends AppCompatActivity {
             if (getFilterQueryProvider() != null) {
                 return getFilterQueryProvider().runQuery(constraint);
             }
+            Log.i("MARCA ADAPTER", "LIMPIANDO NUMERO DE ID MARCA");
             Cursor cursor = mDbHelper.buscarMarca( (constraint != null ? constraint.toString() : null));
-            producto.getMarca().setId(0);
-            producto.getMarca().setNombre("");
-            producto.getMarca().setDescripcion("");
             return cursor;
         }
 
         @Override
         public String convertToString(Cursor cursor) {
+            Log.i("MARCA ADAPTER", "CONVIRTIENDO DE ID MARCA");
+            producto.setMarca(new Marca());
+
             final int columnIndex = cursor.getColumnIndexOrThrow(Marca.colNOMBRE);
             final String str = cursor.getString(columnIndex);
             return str;
@@ -288,6 +310,7 @@ public class EditarProductoActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> listView, View view, int position, long id) {
+            Log.i("MARCA ADAPTER", "SELECCIONANDO DE ID MARCA");
             Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
             producto.getMarca().setId(Modelo.getInt(cursor, Marca.colID));

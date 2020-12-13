@@ -13,14 +13,11 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.OrganizApp">
-        <activity android:name=".ui.EditarStockProductoActivity"></activity>
-        <activity android:name=".ui.ListaProductoActivity" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/Theme.OrganizApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,6 +29,9 @@
         <activity android:name=".ui.EditarMarcaActivity" />
         <activity android:name=".ui.ListaCategoriasActivity" />
         <activity android:name=".ui.ListaMarcasActivity" />
+        <activity android:name=".ui.EditarStockProductoActivity"></activity>
+        <activity android:name=".ui.ListaStockProductoActivity"></activity>
+        <activity android:name=".ui.ListaProductoActivity" />
         <activity android:name=".ui.ListaUsuariosActivity" />
         <activity android:name=".adapter.EscanearActivity" />
     </application>
