@@ -13,6 +13,9 @@
     <!-- TEXTOS PARA BOTONES -->
     <string name="btn_ingresar_producto">Ingresar Producto</string>
 
+    <string name="btn_usuario">Usuarios</string>
+
+
     <string name="btn_categoria">Categorias</string>
     <string name="btn_add_categoria">Agregar Categoria</string>
     <string name="btn_edit_categoria">Editar Categoria</string>

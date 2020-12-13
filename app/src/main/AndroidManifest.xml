@@ -32,6 +32,7 @@
         <activity android:name=".ui.EditarMarcaActivity" />
         <activity android:name=".ui.ListaCategoriasActivity" />
         <activity android:name=".ui.ListaMarcasActivity" />
+        <activity android:name=".ui.ListaUsuariosActivity" />
         <activity android:name=".adapter.EscanearActivity" />
     </application>
 

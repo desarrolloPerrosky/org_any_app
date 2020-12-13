@@ -1,8 +1,20 @@
 # org_any_app
 
 OrganizApp es un trabajo final de universidad
+id
+correo
+nombre
+apellido
+perfil
 
 
+
+
+   $datos["id"] = "1";
+                    $datos["correo"] = "hector@organizapp.cl";
+                    $datos["nombre"] = "Hector Raul";
+                    $datos["apellido"] = "Ninez Jimenez";
+                    $datos["perfil"] = "admin";
 ### Ejemplo de Usuarios
 
  - hector@organizapp.cl
@@ -23,7 +35,8 @@ OrganizApp es un trabajo final de universidad
 
 
 
-´´´
+```
+
 <?php
 include_once '../include/Config.php';
 require '../libs/Slim/Slim.php';
@@ -145,4 +158,5 @@ function verifyRequiredParams($required_fields) {
         $app->stop();
     }
 }
-´´´
+
+```
