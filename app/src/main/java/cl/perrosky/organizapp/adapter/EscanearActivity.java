@@ -18,6 +18,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class EscanearActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
+    public static final String RETORNO = "codigo_de_barras";
     private static final int CODIGO_PERMISOS_CAMARA = 1;
 
     private boolean permisoCamaraConcedido = false;
@@ -51,8 +52,6 @@ public class EscanearActivity extends AppCompatActivity implements ZXingScannerV
         escanerZXing.stopCamera(); // Pausar en onPause
     }
 
-
-
     @Override
     public void handleResult(Result resultado) {
 
@@ -63,7 +62,7 @@ public class EscanearActivity extends AppCompatActivity implements ZXingScannerV
         String codigo = resultado.getText();
         // Preparar un Intent para regresar datos a la actividad que nos llamó
         Intent intentRegreso = new Intent();
-        intentRegreso.putExtra("codigo", codigo);
+        intentRegreso.putExtra(RETORNO, codigo);
         setResult(Activity.RESULT_OK, intentRegreso);
 
         // Cerrar la actividad. Ahora mira onActivityResult de MainActivity

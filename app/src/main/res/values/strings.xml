@@ -43,6 +43,7 @@
     <!-- TEXTOS PARA LOS INGRESOS DE TEXTOS -->
     <string name="txt_codigo">Codigo de Producto</string>
     <string name="txt_nombre">Nombre del Producto</string>
+    <string name="txt_descripcion">Descripcion del Producto</string>
     <string name="txt_marca">Marca del Producto</string>
     <string name="txt_categoria">Categoria del Producto</string>
     <string name="txt_fecha_compra">Fecha de Compra</string>

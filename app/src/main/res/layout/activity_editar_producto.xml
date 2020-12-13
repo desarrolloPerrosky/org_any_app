@@ -20,10 +20,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.008">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal">
 
             <EditText
@@ -57,63 +57,49 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
+            android:id="@+id/nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/txt_nombre">
+            android:hint="@string/txt_nombre"
+            android:layout_marginBottom="8dp">
             <requestFocus />
         </EditText>
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextView1"
+        <EditText
+            android:id="@+id/descripcion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="">
-        </AutoCompleteTextView>
+            android:layout_height="200dp"
+            android:gravity="start|top"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/txt_descripcion"
+            android:inputType="textMultiLine"
+            android:ems="1000" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/txt_fecha_compra"></EditText>
-
-        <EditText
+            android:id="@+id/cantidad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="@string/txt_cantidad"></EditText>
-
+            android:hint="@string/txt_cantidad"
+            android:layout_marginBottom="8dp"/>
 
         <AutoCompleteTextView
+            android:id="@+id/categoria"
             android:layout_width="fill_parent"
             android:inputType="textNoSuggestions"
             android:layout_height="wrap_content"
             android:completionThreshold="1"
-            android:id="@+id/state_name" />
+            android:hint="@string/txt_categoria"
+            android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <AutoCompleteTextView
+            android:id="@+id/marca"
+            android:layout_width="fill_parent"
+            android:inputType="textNoSuggestions"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="string/none"
-            android:id="@+id/state_capital" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="string/none"
-            android:id="@+id/id_categoria" />
-
-        <MultiAutoCompleteTextView
-            android:id="@+id/multiAutoCompleteTextView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_below="@+id/autoCompleteTextView1"
-            android:layout_alignLeft="@+id/autoCompleteTextView1"
-            android:layout_alignStart="@+id/autoCompleteTextView1"
-            android:hint="Multi Auto Complete " />
-
+            android:completionThreshold="1"
+            android:hint="@string/txt_marca"
+            android:layout_marginBottom="8dp"/>
 
     </LinearLayout>
 

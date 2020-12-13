@@ -1,6 +1,7 @@
 package cl.perrosky.organizapp.model;
 
 import android.database.Cursor;
+import android.util.Log;
 
 import java.io.Serializable;
 
@@ -85,6 +86,8 @@ public class Producto implements Serializable {
                 Modelo.getStr(cursor, "nombre_categoria"),
                 Modelo.getStr(cursor, "descripcion_categoria")
         );
+
+        Log.i("PRODUCTO CREADO", this.toString());
     }
 
     // GETTER AND SETTER
@@ -144,5 +147,19 @@ public class Producto implements Serializable {
         this.categoria = categoria;
     }
     // GETTER AND SETTER
+
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", codigoDeBarras='" + codigoDeBarras + '\'' +
+                ", unidades=" + unidades +
+                ", marca=" + marca +
+                ", categoria=" + categoria +
+                '}';
+    }
 }
 
