@@ -35,9 +35,13 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout'
     implementation 'androidx.navigation:navigation-fragment:2.3.2'
     implementation 'androidx.navigation:navigation-ui:2.3.2'
+    implementation 'com.android.volley:volley:1.1.1'
 
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
     testImplementation 'junit:junit:4.+'
 
