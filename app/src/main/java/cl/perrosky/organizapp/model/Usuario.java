@@ -29,8 +29,6 @@ public class Usuario implements Serializable {
     public static final String colCORREO = "correo";
     public static final String colPERFIL = "perfil";
 
-
-
     protected static final String[] COLS = new String[]{ colID, colNOMBRE, colAPELLIDO, colCORREO, colPERFIL };
 
     protected static final String CUERPO =
@@ -41,11 +39,6 @@ public class Usuario implements Serializable {
                     colPERFIL + NUMBER ;
 
     protected static final String SELECT = SELECT_FROM + TABLA ;
-
-
-
-
-
 
     // Atributos
     private Integer id;

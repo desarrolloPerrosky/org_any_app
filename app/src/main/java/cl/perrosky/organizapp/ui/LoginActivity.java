@@ -1,12 +1,8 @@
 package cl.perrosky.organizapp.ui;
 
-import android.app.Activity;
-
-import androidx.lifecycle.ViewModelProvider;
-
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
@@ -39,6 +35,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cl.perrosky.organizapp.R;
+import cl.perrosky.organizapp.bbdd.impl.LoginDataSource;
+import cl.perrosky.organizapp.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,22 +52,14 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
+
+        // FIXME
+        usernameEditText.setText("hector@organizapp.cl");
+        passwordEditText.setText("P4$$w0rd");
+        // FIXME
+
         loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);
-
-
-/*
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
- */
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +70,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void consultarRegistro(){
+    @Override
+    public void onBackPressed()  {
+        finish();
+    }
+
+    private void consultarRegistro() {
         RequestQueue requestQueue;
         Cache cache = new DiskBasedCache(getCacheDir(),1024*1024);
         Network network = new BasicNetwork(new HurlStack());
@@ -112,11 +107,30 @@ public class LoginActivity extends AppCompatActivity {
                                 String apellido = (obj.getJSONObject("data")).getString("apellido");
                                 String perfil = (obj.getJSONObject("data")).getString("perfil");
 
+                                Usuario usuario = new Usuario();
+
+                                usuario.setId(Integer.valueOf(id));
+                                usuario.setCorreo(correo);
+                                usuario.setNombre(nombre);
+                                usuario.setApellido(apellido);
+                                usuario.setPerfil(perfil);
+
                                 Log.i("RETORNO", "ID:" + id);
                                 Log.i("RETORNO", "CORREO:" + correo);
                                 Log.i("RETORNO", "NOMBRE:" + nombre);
                                 Log.i("RETORNO", "APELLIDO:" + apellido);
                                 Log.i("RETORNO", "PERFIL:" + perfil);
+
+                                (new LoginDataSource(LoginActivity.this)).iniciarSesion(usuario);
+
+                                String welcome = getString(R.string.welcome) + usuario.getNombre() + " " + usuario.getApellido();
+                                Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("LOGIN", usuario);
+                                startActivity(intent);
+
+                                finish();
                             }
 
                         } catch (JSONException e) {
@@ -162,8 +176,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("usuario", "hector@organizapp.cl");
-                    params.put("password", "P4$$w0rd2");
+                    params.put("usuario", usernameEditText.getText().toString());
+                    params.put("password", passwordEditText.getText().toString());
                     return params;
                 }
             };

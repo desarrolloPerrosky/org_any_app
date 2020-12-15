@@ -1,14 +1,6 @@
 <resources>
     <string name="app_name">OrganizApp</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-
-    <string name="search_hint">Hello second fragmen. Arg: %1$s</string>
 
     <!-- TEXTOS PARA BOTONES -->
     <string name="btn_ingresar_producto">Ingresar Producto</string>
@@ -28,6 +20,10 @@
     <string name="btn_edit_producto">Editar Producto</string>
     <string name="btn_save_producto">Guardar Producto</string>
     <string name="btn_remove_producto">Eliminar Producto</string>
+
+    <string name="btn_add_stock">Agregar Stock</string>
+
+    <string name="btn_add_venta">Ingresar Venta</string>
 
     <string name="btn_marca">Marcas</string>
     <string name="btn_add_marca">Agregar Marca</string>
@@ -68,5 +64,8 @@
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Iniciar Sesion</string>
     <string name="action_sign_in_short">Iniciar</string>
-    <string name="welcome">"Bienvenido !"</string>
+
+    <string name="welcome">"Bienvenido   "</string>
+
+    <string name="log_ouut">Cerrar Sesion</string>
 </resources>

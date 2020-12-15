@@ -3,6 +3,7 @@ package cl.perrosky.organizapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -12,24 +13,19 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import cl.perrosky.organizapp.R;
+import cl.perrosky.organizapp.bbdd.impl.LoginDataSource;
+import cl.perrosky.organizapp.model.Usuario;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/*
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
+        usuario = (Usuario) getIntent().getSerializableExtra("LOGIN");
     }
 
     public void cambiarPantalla(View vista){
@@ -52,11 +48,40 @@ public class MainActivity extends AppCompatActivity {
             case "USUARIO":
                 startActivity(new Intent(getApplicationContext(), ListaUsuariosActivity.class));
                 break;
-            case "LOGIN":
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        switch (usuario.getPerfil()){
+            case "admin":
+                (findViewById(R.id.PRODUCTOS)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.PRODUCTO)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.CATEGORIAS)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.MARCAS)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.INVENTARIO)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.USUARIO)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.VENTAS)).setVisibility(View.VISIBLE);
                 break;
-            default:
-                startActivity(new Intent(getApplicationContext(), EditarStockProductoActivity.class));
+            case "ekono":
+                (findViewById(R.id.PRODUCTOS)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.PRODUCTO)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.CATEGORIAS)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.MARCAS)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.INVENTARIO)).setVisibility(View.GONE);
+                (findViewById(R.id.USUARIO)).setVisibility(View.GONE);
+                (findViewById(R.id.VENTAS)).setVisibility(View.GONE);
+                break;
+            case "vendedor":
+                (findViewById(R.id.PRODUCTOS)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.PRODUCTO)).setVisibility(View.GONE);
+                (findViewById(R.id.CATEGORIAS)).setVisibility(View.GONE);
+                (findViewById(R.id.MARCAS)).setVisibility(View.GONE);
+                (findViewById(R.id.INVENTARIO)).setVisibility(View.GONE);
+                (findViewById(R.id.USUARIO)).setVisibility(View.GONE);
+                (findViewById(R.id.VENTAS)).setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -70,21 +95,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+
+
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.cerrar:
+                (new LoginDataSource(this)).cerrarSession();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 }

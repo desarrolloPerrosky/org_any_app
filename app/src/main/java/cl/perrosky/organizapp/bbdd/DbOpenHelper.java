@@ -24,6 +24,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(Modelo.CATEGORIA.getCreate());
         db.execSQL(Modelo.USUARIO.getCreate());
+        db.execSQL(Modelo.LOGIN.getCreate());
         db.execSQL(Modelo.MARCA.getCreate());
         db.execSQL(Modelo.PRODUCTO.getCreate());
         Log.i(TAG, "Base de datos creada");
@@ -177,10 +178,11 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(Modelo.PRODUCTO.getInsert("1, 'Analgex', 'tramadol clorhidrato', '7800026245781', 1, 1, 1"));
         db.execSQL(Modelo.PRODUCTO.getInsert("2, 'Zopinom', 'eszopiclona 3mg', '7800007747211', 30, 2, 2"));
+        db.execSQL(Modelo.PRODUCTO.getInsert("3, 'Sal de fruta eno', 'antiacido eno', '7794640170904', 1, 1, 1"));
 
-        db.execSQL(Modelo.USUARIO.getInsert("1, 'A', 'B', 'hector@organizapp.cl','admin'"));
-        db.execSQL(Modelo.USUARIO.getInsert("2, 'A', 'B', 'jaime@organizapp.cl','ekono'"));
-        db.execSQL(Modelo.USUARIO.getInsert("3, 'A', 'B', 'felipe@organizapp.cl','vendedor'"));
+        db.execSQL(Modelo.USUARIO.getInsert("1, 'Hector', 'Niñez', 'hector@organizapp.cl','admin'"));
+        db.execSQL(Modelo.USUARIO.getInsert("2, 'Jaime', 'Santi', 'jaime@organizapp.cl','ekono'"));
+        db.execSQL(Modelo.USUARIO.getInsert("3, 'Felipe', 'Pinto', 'felipe@organizapp.cl','vendedor'"));
 
         Log.i(TAG, "Base de datos poblada");
     }

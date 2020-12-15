@@ -56,6 +56,10 @@ public class EditarStockProductoActivity extends AppCompatActivity {
 
         grupoProducto = (GrupoProducto) getIntent().getSerializableExtra(RETORNO);
 
+        if(grupoProducto==null){
+            grupoProducto = new GrupoProducto();
+        }
+
         txtCantidad = (EditText) findViewById(R.id.txt_cantidad);
         txtValor = (EditText) findViewById(R.id.txt_precio);
 

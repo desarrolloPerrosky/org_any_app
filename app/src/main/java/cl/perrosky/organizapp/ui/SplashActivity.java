@@ -8,24 +8,21 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import cl.perrosky.organizapp.R;
+import cl.perrosky.organizapp.bbdd.impl.LoginDataSource;
+import cl.perrosky.organizapp.model.Categoria;
+import cl.perrosky.organizapp.model.Usuario;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private Handler mHandler;
+    private LoginDataSource loginDataSource;
+    private Usuario usuario;
     private Handler mHandlerBarra;
 
     private ProgressBar barra;
     private int progreso;
-
-    Runnable myTask = new Runnable() {
-        @Override
-        public void run() {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
-    };
 
     Runnable manejadorBarra = new Runnable() {
         @Override
@@ -38,6 +35,18 @@ public class SplashActivity extends AppCompatActivity {
             } else {
                 progreso=100;
                 barra.setProgress(progreso);
+
+                if(usuario==null){
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                } else {
+                    String welcome = getString(R.string.welcome) + usuario.getNombre() + " " + usuario.getApellido();
+                    Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("LOGIN", usuario);
+                    startActivity(intent);
+                }
+                finish();
             }
         }
     };
@@ -49,25 +58,24 @@ public class SplashActivity extends AppCompatActivity {
 
         barra = (ProgressBar) findViewById(R.id.progressBar);
 
+        loginDataSource = new LoginDataSource(SplashActivity.this);
+
+        usuario = loginDataSource.loginActive();
         progreso = 0;
         barra.setProgress(progreso);
 
-
-        mHandler = new Handler(Looper.getMainLooper());
         mHandlerBarra = new Handler(Looper.getMainLooper());
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mHandler.postDelayed(myTask,  2000);
         mHandlerBarra.postDelayed(manejadorBarra,  150);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mHandler.removeCallbacks(myTask);
-        mHandler.removeCallbacks(manejadorBarra);
+        mHandlerBarra.removeCallbacks(manejadorBarra);
     }
 }
