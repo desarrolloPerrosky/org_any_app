@@ -4,9 +4,11 @@ package cl.perrosky.organizapp.ui;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -132,8 +134,29 @@ public class EditarProductoActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.lbl_save_fail, Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.eliminar:
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.btn_remove_marca)
+                        .setMessage("Estas por eliminar a " + producto.getNombre() +"\n ¿ Continuar con la eliminacion ?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                if(eliminarProducto()){
+                                    Toast.makeText(EditarProductoActivity.this, R.string.lbl_remove_ok, Toast.LENGTH_SHORT).show();
+                                    cerrar();
+                                } else {
+                                    Toast.makeText(EditarProductoActivity.this, R.string.lbl_remove_fail, Toast.LENGTH_LONG).show();
+                                }
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean eliminarProducto(){
+        int retorno = (new ProductoDataSource(this)).eliminarProducto(producto);
+        return (retorno == 1);
     }
 
     @Override
