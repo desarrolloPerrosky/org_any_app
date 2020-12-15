@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 (findViewById(R.id.PRODUCTO)).setVisibility(View.VISIBLE);
                 (findViewById(R.id.CATEGORIAS)).setVisibility(View.VISIBLE);
                 (findViewById(R.id.MARCAS)).setVisibility(View.VISIBLE);
-                (findViewById(R.id.INVENTARIO)).setVisibility(View.GONE);
+                (findViewById(R.id.INVENTARIO)).setVisibility(View.VISIBLE);
                 (findViewById(R.id.USUARIO)).setVisibility(View.GONE);
                 (findViewById(R.id.VENTAS)).setVisibility(View.GONE);
                 break;
