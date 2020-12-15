@@ -36,12 +36,12 @@
             <ImageView
                 android:id="@+id/imagen"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:layout_margin="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/man" />
+                app:srcCompat="@drawable/producto" />
 
             <TableLayout
                 android:layout_width="match_parent"

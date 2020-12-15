@@ -25,13 +25,11 @@ import com.android.volley.Response;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,15 +42,20 @@ import cl.perrosky.organizapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private Button loginButton;
+    private ProgressBar loadingProgressBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        usernameEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
+        loginButton = findViewById(R.id.login);
+        loadingProgressBar = findViewById(R.id.loading);
 
 
 /*
@@ -71,12 +74,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
+                bloqueoLogin();
                 consultarRegistro();
             }
         });
     }
-
 
     private void consultarRegistro(){
         RequestQueue requestQueue;
@@ -116,15 +118,28 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.i("RETORNO", "APELLIDO:" + apellido);
                                 Log.i("RETORNO", "PERFIL:" + perfil);
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        enableLogin();
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        String retorno = "Error indeterminado";
+                        switch (error.networkResponse.statusCode){
+                            case 401:
+                                retorno = "Error en las credenciales";
+                                break;
+                        }
                         Log.d("Volley", "Error: " + error.getMessage());
                         error.printStackTrace();
+                        Log.d("Volley 234", "Error: " + error.networkResponse.statusCode);
+
+                        Toast.makeText(getApplicationContext(), retorno, Toast.LENGTH_SHORT).show();
+                        enableLogin();
                     }
 
             }) {
@@ -162,7 +177,17 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    private void bloqueoLogin(){
+        usernameEditText.setEnabled(false);
+        passwordEditText.setEnabled(false);
+        loginButton.setEnabled(false);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void enableLogin(){
+        usernameEditText.setEnabled(true);
+        passwordEditText.setEnabled(true);
+        loginButton.setEnabled(true);
+        loadingProgressBar.setVisibility(View.GONE);
     }
 }

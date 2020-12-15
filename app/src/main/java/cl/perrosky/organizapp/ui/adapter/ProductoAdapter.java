@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,9 @@ public class ProductoAdapter extends ArrayAdapter {
         View item = inflater.inflate(R.layout.adapter_item_producto, null);
 
         Producto producto = listado.get(position);
+
+        ImageView imagen = (ImageView) item.findViewById(R.id.imagen);
+        imagen.setImageResource(R.drawable.producto);
 
         TextView nombre = (TextView) item.findViewById(R.id.nombre);
         nombre.setText(producto.getNombre());

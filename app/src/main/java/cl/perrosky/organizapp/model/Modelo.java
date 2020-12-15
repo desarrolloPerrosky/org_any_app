@@ -9,6 +9,7 @@ public enum Modelo {
 
     CATEGORIA(Categoria.TABLA, Categoria.CUERPO, Categoria.SELECT, Categoria.COLS, false),
     USUARIO(Usuario.TABLA, Usuario.CUERPO, Usuario.SELECT, Usuario.COLS, false),
+    LOGIN(Login.TABLA, Login.CUERPO, Login.SELECT, Login.COLS, false),
     MARCA(Marca.TABLA, Marca.CUERPO, Marca.SELECT, Marca.COLS, false),
     PRODUCTO(Producto.TABLA, Producto.CUERPO, Producto.SELECT, Producto.COLS, true);
 

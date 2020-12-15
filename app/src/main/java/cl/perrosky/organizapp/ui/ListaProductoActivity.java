@@ -23,8 +23,6 @@ import cl.perrosky.organizapp.ui.adapter.ProductoAdapter;
 
 public class ListaProductoActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    //private static final int  = 2;
-
     private ProductoDataSource dataSource;
     private List<Producto> listado;
 
